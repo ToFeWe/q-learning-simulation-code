@@ -1,0 +1,2 @@
+numpy==1.19.0
+# Note that qpricesim has to be installed locally at the moment as its not on pypi yet
