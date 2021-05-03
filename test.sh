@@ -34,7 +34,7 @@ shopt -s extglob
 
 echo >> $LOGFILE
 echo "RUNNING INITAL TESTS....." >> $LOGFILE
-pytest -v >> $LOGFILE
+pytest .. -v >> $LOGFILE
 
 echo "STARTING..." >> $LOGFILE
 echo "---------------------------" >> $LOGFILE
