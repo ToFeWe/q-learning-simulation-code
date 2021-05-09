@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -l select=1:ncpus=1:mem=270MB:arch=skylake
-#PBS -l walltime=71:59:00
+#PBS -l walltime=130:59:00
 #PBS -A "AlgColl"
 #PBS -r y
 #PBS -o pbs_output/o_files/3_agents/grid_search/job_array_index_[^array_index^].OU
