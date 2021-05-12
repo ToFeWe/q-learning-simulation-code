@@ -11,6 +11,7 @@
     "learning_iterations": 1000000000,
     "rounds_convergence": 100000,
     "Q_star_threshold": 1e-09,
+    "avg_price_rounds": 1000,
     "learning_rate": 0.02954545454545455,
     "beta_decay": 6.157575757575758e-07,
     "path_differ": "3_agents"
