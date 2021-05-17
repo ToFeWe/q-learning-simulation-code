@@ -64,8 +64,6 @@ def load_simulation_data(file_path):
     # Unroll the dicts
     all_dicts = [d.values() for d in simulation_results]
 
-    # TODO: Add a check here that all simulations are used and the seeds are all
-    # unique
     return all_dicts
 
 
