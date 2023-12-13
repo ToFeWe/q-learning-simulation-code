@@ -14,5 +14,7 @@
     "avg_price_rounds": 1000,
     "learning_rate": 0.027272727272727275,
     "beta_decay": 1e-08,
+    "n_play_periods": 30,
+    "periods_before_deviation": 10,  
     "path_differ": "2_agents"
 }
