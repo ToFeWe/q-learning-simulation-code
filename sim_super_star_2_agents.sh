@@ -21,14 +21,13 @@ echo "# CPUs    : "$NCPUS >> $LOGFILE
 echo "# Threads : "$OMP_NUM_THREADS >> $LOGFILE
 
 
-module load Python/3.6.5
-export PYTHONPATH=/home/werner01/.local/lib/python3.6/site-packages/
+module load Python/3.11.3
 
 cd $PBS_O_WORKDIR
 #cd /home/werner01/Documents/alg_price
 
 # Note that the environment was created ex ante
-source ../q_env/bin/activate
+source ./q_env/bin/activate
 
 shopt -s extglob
 
