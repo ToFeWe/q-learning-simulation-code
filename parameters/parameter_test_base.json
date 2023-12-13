@@ -11,5 +11,8 @@
   "learning_iterations": 1000000000,
   "rounds_convergence": 100000,
   "Q_star_threshold": 1e-09,
-  "avg_price_rounds": 1000
+  "avg_price_rounds": 1000,
+  "n_play_periods": 30,
+  "periods_before_deviation": 10
+
 }
