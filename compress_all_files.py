@@ -6,7 +6,7 @@ and compress them into one file.
 
 import pickle
 from os import walk
-
+import sys
 
 def load_folder_files(file_path):
     """
@@ -75,53 +75,37 @@ def load_grid_simulation_data(file_path):
     return all_dicts
 
 
-def sim_results_to_dict(file_path):
+def sim_results_to_dict(file_path, output_path):
     """
-
-    Returns the simulation results arrays.
-
-
-    Args:
-        file_path (string): Path to the simulation files
-
-    Returns:
-        dict: Dict with all simulation results arrays
+    Process the simulation results arrays and save them immediately to a file.
     """
-    all_simulation_dicts = load_grid_simulation_data(file_path=file_path)
+    for simulation_dicts in load_grid_simulation_data(file_path=file_path):
+        # Dropping the super star tuple here.
+        (
+            state_profitability_array,
+            weighted_profitability_array,
+            best_response_share_array,
+            avg_profit_array,
+            avg_price_array,
+            nash_equilibrium_array,
+            all_best_actions_array,
+            periods_shock_array,
+            _,
+        ) = simulation_dicts
 
-    # Dropping the super star tuple here.
-    (
-        state_profitability_array,
-        weighted_profitability_array,
-        best_response_share_array,
-        avg_profit_array,
-        avg_price_array,
-        nash_equilibrium_array,
-        all_best_actions_array,
-        periods_shock_array,
-        _,
-    ) = zip(*all_simulation_dicts)
+        array_names = ["state_profitability", "weighted_profitability", "best_response_share", 
+                       "avg_profit", "avg_price", "nash_equilibrium", "all_best_actions", "periods_shock"]
+        arrays = [state_profitability_array, weighted_profitability_array, best_response_share_array, 
+                  avg_profit_array, avg_price_array, nash_equilibrium_array, all_best_actions_array, periods_shock_array]
 
-    all_arrays = {}
-    all_arrays["state_profitability"] = state_profitability_array
-    all_arrays["weighted_profitability"] = weighted_profitability_array
-    all_arrays["best_response_share"] = best_response_share_array
-    all_arrays["avg_profit"] = avg_profit_array
-    all_arrays["avg_price"] = avg_price_array
-    all_arrays["nash_equilibrium"] = nash_equilibrium_array
-    all_arrays["all_best_actions"] = all_best_actions_array
-    all_arrays["periods_shock"] = periods_shock_array
-
-    return all_arrays
+        for array_name, array in zip(array_names, arrays):
+            print("Saving ", array_name)
+            with open(f"{output_path}_{array_name}.pickle", "wb") as f:
+                pickle.dump(array, f)
 
 if __name__ == '__main__':
-    for n_agents in [2, 3]:
-        print("Running for ", n_agents, " agents")
-        SIMULATION_FILE_PATH = f"./bld/{n_agents}_agents/grid_search/"
-        all_arrays = sim_results_to_dict(file_path=SIMULATION_FILE_PATH)
-        for key, value in all_arrays.items():
-            print("Saving the file for ", key)
-            with open(f"./bld/{n_agents}_agents/grid_{n_agents}_agents_{key}.pickle", "wb") as f:
-                pickle.dump(value, f)
-        # Free memory after 2 agents
-        del all_arrays
+    n_agents = sys.argv[1]
+    print("Running for ", n_agents, " agents")
+    SIMULATION_FILE_PATH = f"./bld/{n_agents}_agents/grid_search/"
+    OUTPUT_FILE_PATH = f"./bld/{n_agents}_agents/"
+    sim_results_to_dict(file_path=SIMULATION_FILE_PATH, output_path=OUTPUT_FILE_PATH)
