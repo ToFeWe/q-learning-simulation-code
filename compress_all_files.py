@@ -123,3 +123,5 @@ if __name__ == '__main__':
             print("Saving the file for ", key)
             with open(f"./bld/{n_agents}_agents/grid_{n_agents}_agents_{key}.pickle", "wb") as f:
                 pickle.dump(value, f)
+        # Free memory after 2 agents
+        del all_arrays
