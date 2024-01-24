@@ -8,6 +8,7 @@ import pickle
 from os import walk
 import sys
 
+
 def load_folder_files(file_path):
     """
     A function to load all files in a given
@@ -74,10 +75,9 @@ def load_grid_simulation_data(file_path):
     # Should be refactored!
     return all_dicts
 
-
-def sim_results_to_dict(file_path, output_path):
+def sim_results_to_dict(file_path):
     """
-    Process the simulation results arrays and save them immediately to a file.
+    Process the simulation results arrays and yield them one by one.
     """
     for simulation_dicts in load_grid_simulation_data(file_path=file_path):
         # Dropping the super star tuple here.
@@ -99,13 +99,13 @@ def sim_results_to_dict(file_path, output_path):
                   avg_profit_array, avg_price_array, nash_equilibrium_array, all_best_actions_array, periods_shock_array]
 
         for array_name, array in zip(array_names, arrays):
-            print("Saving ", array_name)
-            with open(f"{output_path}_{array_name}.pickle", "wb") as f:
-                pickle.dump(array, f)
+            yield array_name, array
 
 if __name__ == '__main__':
-    n_agents = sys.argv[1]
+    n_agents = int(sys.argv[1])  # Get n_agents from command-line arguments
     print("Running for ", n_agents, " agents")
     SIMULATION_FILE_PATH = f"./bld/{n_agents}_agents/grid_search/"
-    OUTPUT_FILE_PATH = f"./bld/{n_agents}_agents/"
-    sim_results_to_dict(file_path=SIMULATION_FILE_PATH, output_path=OUTPUT_FILE_PATH)
+    for array_name, array in sim_results_to_dict(file_path=SIMULATION_FILE_PATH):
+        print("Saving the file for ", array_name)
+        with open(f"./bld/{n_agents}_agents/grid_{n_agents}_agents_{array_name}.pickle", "wb") as f:
+            pickle.dump(array, f)
