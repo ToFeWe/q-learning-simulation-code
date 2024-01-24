@@ -25,7 +25,7 @@ to be specified in  the JSON.
     Q_star_threshold (float): Convergence rule when solving the known MDP, when deriving the
                               optimal q matrix for an agent.
     learning_rate (float): Learning rate for the super star agents.
-    beta_decay (float): Decay parameter for the exploartion rate
+    beta_decay (float): Decay parameter for the exploration rate
     simulation_periods (integer): How many rounds should be played upon convergence?
                                   Note that this is not used in this script but only
                                   later in the analysis.
