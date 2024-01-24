@@ -116,7 +116,10 @@ def sim_results_to_dict(file_path):
 
 if __name__ == '__main__':
     for n_agents in [2, 3]:
+        print("Running for ", n_agents, " agents")
         SIMULATION_FILE_PATH = f"./bld/{n_agents}_agents/grid_search/"
         all_arrays = sim_results_to_dict(file_path=SIMULATION_FILE_PATH)
-        with open(f"./bld/{n_agents}_agents/grid_{n_agents}_agents.pickle", "wb") as f:
-            pickle.dump(all_arrays, f)
+        for key, value in all_arrays.items():
+            print("Saving the file for ", key)
+            with open(f"./bld/{n_agents}_agents/grid_{n_agents}_agents_{key}.pickle", "wb") as f:
+                pickle.dump(value, f)
