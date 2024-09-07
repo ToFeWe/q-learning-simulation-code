@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l select=1:ncpus=1:mem=250MB
+#PBS -l select=1:ncpus=1:mem=400MB
 #PBS -l walltime=01:00:00
 #PBS -A "AlgColl"
 #PBS -r y
@@ -35,7 +35,7 @@ echo >> $LOGFILE
 echo "STARTING..." >> $LOGFILE
 echo "---------------------------" >> $LOGFILE
 
-eval 'python run_super_star_simulation.py parameter_super_star_2_agent_human '$PBS_ARRAY_INDEX | tee -a ${LOGFILE}
+eval 'python run_super_star_simulation_humans.py parameter_super_star_2_agent_human '$PBS_ARRAY_INDEX | tee -a ${LOGFILE}
 
 echo >> $LOGFILE
 qstat -f $PBS_JOBID >> $LOGFILE
