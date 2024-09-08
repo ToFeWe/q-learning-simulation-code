@@ -16,5 +16,6 @@
     "beta_decay": 1e-08,
     "n_play_periods": 30,
     "periods_before_deviation": 10,  
-    "path_differ": "2_agents"
+    "path_differ": "2_agents",
+    "use_human_Q_matrix": 1
 }
