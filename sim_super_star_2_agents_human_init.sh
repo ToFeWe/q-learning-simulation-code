@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l select=1:ncpus=1:mem=400MB
+#PBS -l select=1:ncpus=1:mem=400MB:arch=icelake
 #PBS -l walltime=01:00:00
 #PBS -A "AlgColl"
 #PBS -r y
